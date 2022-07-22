@@ -14,6 +14,7 @@ const StartPage = {
   
   after_render: () => {
     console.log('startPage rendered, now we can start some logic part');
+
     const booksLink = document.querySelector('#booksLink');
     //to change, it adds more and more eventlisteners
     booksLink.addEventListener('click', (event) => {
@@ -32,6 +33,7 @@ const StartPage = {
       document.location.href = new_url;
       }
     })
+    
   },
 };
 
