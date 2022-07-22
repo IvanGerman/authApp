@@ -1,4 +1,4 @@
-import { isUserAuth } from '../../state/data';
+import { data } from '../../state/data';
 import './StartPage.scss';
 
 const StartPage = {
@@ -20,8 +20,7 @@ const StartPage = {
     booksLink.addEventListener('click', (event) => {
       event.preventDefault();
       console.log('booksLink');
-      console.log('isUserAuth--',isUserAuth, typeof(isUserAuth));
-      if ( isUserAuth === true ) {
+      if ( data.isUserAuth === true ) {
        // document.URL is the current url
       var url_ob = new URL(document.URL);
       url_ob.hash = 'books';
@@ -33,7 +32,7 @@ const StartPage = {
       document.location.href = new_url;
       }
     })
-    
+
   },
 };
 

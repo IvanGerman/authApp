@@ -1,3 +1,4 @@
+import { data, isUserAuth } from '../../state/data';
 import './LoginPage.scss';
 
 const LoginPage = {
@@ -36,7 +37,10 @@ const LoginPage = {
             'password': loginPassword.value
           }) // body data type must match "Content-Type" header
       })
-      .then((response) => {
+      .then((response) => { 
+        if (response.status === 200) {
+          data.setIsUserAuth = true;
+        }
         return response.json();
       })
       .then((data) => {
