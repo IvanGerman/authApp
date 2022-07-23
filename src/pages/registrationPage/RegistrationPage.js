@@ -1,3 +1,4 @@
+import { sendRegistrationData } from '../../components/API/registrationReq/registrationReq';
 import './RegistrationPage.scss';
 
 const RegistrationPage = {
@@ -25,20 +26,24 @@ const RegistrationPage = {
     const regEmail = document.querySelector('#regEmail');
     const regPassword = document.querySelector('#regPassword');
 
+    // function myFunc() {
+    //   console.log('post request sent', regEmail.value, regPassword.value);
+    //   fetch('http://localhost:5000/api/auth/register', {
+    //     method: 'POST', 
+    //     mode: 'cors', 
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(
+    //       {'email': regEmail.value,
+    //         'password': regPassword.value
+    //       }) // body data type must match "Content-Type" header
+    //   });
+    // };
+
     function myFunc() {
-      console.log('post request sent', regEmail.value, regPassword.value);
-      fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST', 
-        mode: 'cors', 
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-          {'email': regEmail.value,
-            'password': regPassword.value
-          }) // body data type must match "Content-Type" header
-      });
-    };
+      sendRegistrationData(regEmail.value, regPassword.value);
+    }
 
     regBtn.addEventListener('click', myFunc);
 
