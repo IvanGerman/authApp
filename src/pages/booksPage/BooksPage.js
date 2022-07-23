@@ -1,3 +1,4 @@
+import { data } from '../../state/data';
 import './BooksPage.scss';
 
 const BooksPage = {
@@ -32,7 +33,7 @@ const BooksPage = {
         mode: 'cors', 
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjExMUBtYWlsLnJ1IiwidXNlcklkIjoiNjJkYTNjOTg0NjgxMWYwZmM4OTI1ZDVlIiwiaWF0IjoxNjU4NDc2MTk4LCJleHAiOjE2NTg0Nzk3OTh9.gg69DRe7mo8DF32qZmMeIza5t7EAe9AL5biXdkdShEM'
+          'Authorization': data.bearerToken
         }
       })
       .then((response) => { 
@@ -53,7 +54,7 @@ const BooksPage = {
         mode: 'cors', 
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjExMUBtYWlsLnJ1IiwidXNlcklkIjoiNjJkYTNjOTg0NjgxMWYwZmM4OTI1ZDVlIiwiaWF0IjoxNjU4NDc2MTk4LCJleHAiOjE2NTg0Nzk3OTh9.gg69DRe7mo8DF32qZmMeIza5t7EAe9AL5biXdkdShEM'
+          'Authorization': data.bearerToken
         },
         body: JSON.stringify(
           {'name': postBookInput.value,

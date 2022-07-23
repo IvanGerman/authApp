@@ -1,4 +1,4 @@
-import { data, isUserAuth } from '../../state/data';
+import { data } from '../../state/data';
 import './LoginPage.scss';
 
 const LoginPage = {
@@ -43,8 +43,9 @@ const LoginPage = {
         }
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then((responseData) => {
+        console.log(responseData);
+        data.setBearerToken = responseData.token;
       });
     };
 
