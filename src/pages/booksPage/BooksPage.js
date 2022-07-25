@@ -14,6 +14,11 @@ const BooksPage = {
         <input type="text" id="postBook" name="postBook" placeholder="book name">
         <br><br>
         <input type="button" value="Submit" id="postBookBtn">
+        <br><br>
+        <p for="deleteBooks">Delete book:</p>
+        <input type="text" id="deleteBook" name="deleteBook" placeholder="book id">
+        <br><br>
+        <input type="button" value="Submit" id="deleteBookBtn">
       </div>
     `;
     return view;
@@ -25,6 +30,8 @@ const BooksPage = {
     const getBooksBtn = document.querySelector('#getBooksBtn');
     const postBookInput = document.querySelector('#postBook');
     const postBookBtn = document.querySelector('#postBookBtn');
+    const deleteBookInput = document.querySelector('#deleteBook');
+    const deleteBookBtn = document.querySelector('#deleteBookBtn');
 
     async function myGetFunc() {
       console.log('get request from booksPage sent');
@@ -69,6 +76,27 @@ const BooksPage = {
     };
 
     postBookBtn.addEventListener('click', myPostFunc);
+
+
+    async function myDeleteFunc() {
+      console.log('delete request from booksPage sent', deleteBookInput.value);
+      await fetch(`http://localhost:5000/api/books/${deleteBookInput.value}`, {
+        method: 'DELETE', 
+        mode: 'cors', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': data.bearerToken
+        }
+      })
+      .then((response) => { 
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+    };
+
+    deleteBookBtn.addEventListener('click', myDeleteFunc);
   },
 };
 
