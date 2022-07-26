@@ -19,6 +19,13 @@ const BooksPage = {
         <input type="text" id="deleteBook" name="deleteBook" placeholder="book id">
         <br><br>
         <input type="button" value="Submit" id="deleteBookBtn">
+        <br><br>
+        <p for="updateBooks">Update book:</p>
+        <input type="text" id="updateBookInput1" name="updateBook1" placeholder="book id">
+        <br><br>
+        <input type="text" id="updateBookInput2" name="updateBook2" placeholder="new book name">
+        <br><br>
+        <input type="button" value="Submit" id="updateBookBtn">
       </div>
     `;
     return view;
@@ -32,6 +39,9 @@ const BooksPage = {
     const postBookBtn = document.querySelector('#postBookBtn');
     const deleteBookInput = document.querySelector('#deleteBook');
     const deleteBookBtn = document.querySelector('#deleteBookBtn');
+    const updateBookInput1 = document.querySelector('#updateBookInput1');
+    const updateBookInput2 = document.querySelector('#updateBookInput2');
+    const updateBookBtn = document.querySelector('#updateBookBtn');
 
     async function myGetFunc() {
       console.log('get request from booksPage sent');
@@ -97,7 +107,34 @@ const BooksPage = {
     };
 
     deleteBookBtn.addEventListener('click', myDeleteFunc);
+
+
+    async function myUpdateFunc() {
+      console.log('update request from booksPage sent', updateBookInput1.value,updateBookInput2.value);
+      await fetch(`http://localhost:5000/api/books/${updateBookInput1.value}`, {
+        method: 'PUT', 
+        mode: 'cors', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': data.bearerToken
+        },
+        body: JSON.stringify(
+          {'name': updateBookInput2.value,
+          })
+      })
+      .then((response) => { 
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+    };
+
+    updateBookBtn.addEventListener('click', myUpdateFunc);
   },
 };
+
+
+
 
 export default BooksPage;
