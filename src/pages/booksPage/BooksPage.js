@@ -1,4 +1,5 @@
 import { data } from '../../state/data';
+import Utils from '../../utils/Utils';
 import './BooksPage.scss';
 
 const BooksPage = {
@@ -44,6 +45,13 @@ const BooksPage = {
     const updateBookBtn = document.querySelector('#updateBookBtn');
 
     async function myGetFunc() {
+      let tokenStatus = Utils.checkTokenExpTime(localStorage.getItem('tokenExpirationTime'));
+      if ( tokenStatus === 'expired') {
+        console.log('have to get new acces token at route api/token');
+        // post request to api/token
+        // if RT invalid, redirect to login page / return
+        // if RT ok, store new exp time in LS and go on with the code below
+      }
       console.log('get request from booksPage sent');
       await fetch('http://localhost:5000/api/books', {
         method: 'GET', 
