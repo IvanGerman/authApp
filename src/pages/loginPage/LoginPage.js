@@ -46,6 +46,15 @@ const LoginPage = {
       .then((responseData) => {
         console.log(responseData);
         data.setBearerToken = responseData.token;
+
+        // here we store refreshToken in localStorage
+        localStorage.setItem('refreshToken', responseData.refreshToken);
+
+        // here we store expiration time of the token in  localStorage
+        
+        const jwtPayload = JSON.parse(window.atob(responseData.token.split('.')[1]))
+        const tokenExpirationTime = jwtPayload.exp * 1000;
+        localStorage.setItem('tokenExpirationTime', tokenExpirationTime);      
       });
     };
 

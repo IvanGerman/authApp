@@ -53,12 +53,15 @@ const BooksPage = {
           'Authorization': data.bearerToken
         }
       })
-      .then((response) => { 
-        return response.json();
+      .then( async (response) => { 
+        const response2 = await response.json();
+        console.log(response2);
+        return response2;
       })
       .then((data) => {
         console.log(data);
-      });
+      })
+      .catch(err => console.log(err))
     };
 
     getBooksBtn.addEventListener('click', myGetFunc);
