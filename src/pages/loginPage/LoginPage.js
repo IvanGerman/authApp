@@ -46,6 +46,7 @@ const LoginPage = {
       .then((responseData) => {
         console.log(responseData);
         data.setBearerToken = responseData.token;
+        console.log('login responseData.token',responseData.token);
 
         // here we store refreshToken in localStorage
         localStorage.setItem('refreshToken', responseData.refreshToken);

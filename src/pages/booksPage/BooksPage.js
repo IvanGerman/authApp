@@ -50,12 +50,12 @@ const BooksPage = {
       let tokenStatus = Utils.checkTokenExpTime(localStorage.getItem('tokenExpirationTime'));
       if ( tokenStatus === 'expired') {
         console.log('have to get new acces token at route api/token');
-        // post request to api/token
+        // post request to api/token for new access token
         const refreshToken = localStorage.getItem('refreshToken');
-        await sendRefreshToken(refreshToken);
+        const result = await sendRefreshToken(refreshToken);
         // if RT invalid, redirect to login page / return
         // if RT ok, store new exp time in LS and go on with the code below
-        return
+        if ( result !== 'accessTokenChanged' ) { return };
       }
 
 
@@ -63,7 +63,7 @@ const BooksPage = {
 
       console.log('get request from booksPage sent');
 
-      await fetch('http://localhost:5000/api/books', {
+      await fetch('http://localhost:5000/api/books', { 
         method: 'GET', 
         mode: 'cors', 
         headers: {
@@ -73,7 +73,6 @@ const BooksPage = {
       })
       .then( async (response) => { 
         const response2 = await response.json();
-        console.log(response2);
         return response2;
       })
       .then((data) => {
