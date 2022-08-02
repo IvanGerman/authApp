@@ -47,21 +47,7 @@ const BooksPage = {
 
     async function myGetFunc() {
 
-      let tokenStatus = Utils.checkTokenExpTime(localStorage.getItem('tokenExpirationTime'));
-      if ( tokenStatus === 'expired') {
-        console.log('have to get new acces token at route api/token');
-        // post request to api/token for new access token
-        const refreshToken = localStorage.getItem('refreshToken');
-        const result = await sendRefreshToken(refreshToken);
-        // if RT invalid, redirect to login page / return
-        // if RT ok, store new exp time in LS and go on with the code below
-        if ( result !== 'accessTokenChanged' ) { return };
-      }
-
-
-
-
-      console.log('get request from booksPage sent');
+      await Utils.getNewAccessToken();
 
       await fetch('http://localhost:5000/api/books', { 
         method: 'GET', 
@@ -155,6 +141,20 @@ const BooksPage = {
 };
 
 
+// async function getNewAccessToken() {
+//   let tokenStatus = Utils.checkTokenExpTime(localStorage.getItem('tokenExpirationTime'));
+//       if ( tokenStatus === 'expired') {
+//         console.log('have to get new acces token at route api/token');
+//         // post request to api/token for new access token
+//         const refreshToken = localStorage.getItem('refreshToken');
+//         const result = await sendRefreshToken(refreshToken);
+//         // if RT invalid, redirect to login page / return
+//         // if RT ok, store new exp time in LS and go on with the code below
+//         if ( result !== 'accessTokenChanged' ) { 
+//           console.log('new access token was not received');
+//           return };
+//       }
+// }
 
 
 export default BooksPage;
