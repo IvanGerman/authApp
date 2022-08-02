@@ -23,6 +23,8 @@ const LoginPage = {
     const loginBtn = document.querySelector('#loginBtn');
     const loginEmail = document.querySelector('#loginEmail');
     const loginPassword = document.querySelector('#loginPassword');
+    const loginLogoutA = document.querySelector('#login-logout-a');
+
 
     async function myFunc() {
       console.log('post request from loginPage sent', loginEmail.value, loginPassword.value);
@@ -40,6 +42,10 @@ const LoginPage = {
       .then((response) => { 
         if (response.status === 200) {
           data.setIsUserAuth = true;
+          loginLogoutA.innerHTML = 'Logout';
+          loginLogoutA.addEventListener('click', () => {
+            //here comes the logout logic and change innerHTML to login
+          })
         }
         return response.json();
       })
