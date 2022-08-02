@@ -71,7 +71,9 @@ const BooksPage = {
 
 
     async function myPostFunc() {
-      console.log('post request from booksPage sent', postBookInput.value);
+
+      await Utils.getNewAccessToken();
+      
       await fetch('http://localhost:5000/api/books', {
         method: 'POST', 
         mode: 'cors', 
@@ -81,7 +83,7 @@ const BooksPage = {
         },
         body: JSON.stringify(
           {'name': postBookInput.value,
-          }) // body data type must match "Content-Type" header
+          }) 
       })
       .then((response) => { 
         return response.json();
@@ -95,7 +97,9 @@ const BooksPage = {
 
 
     async function myDeleteFunc() {
-      console.log('delete request from booksPage sent', deleteBookInput.value);
+
+      await Utils.getNewAccessToken();
+      
       await fetch(`http://localhost:5000/api/books/${deleteBookInput.value}`, {
         method: 'DELETE', 
         mode: 'cors', 
@@ -116,7 +120,9 @@ const BooksPage = {
 
 
     async function myUpdateFunc() {
-      console.log('update request from booksPage sent', updateBookInput1.value,updateBookInput2.value);
+      
+      await Utils.getNewAccessToken();
+
       await fetch(`http://localhost:5000/api/books/${updateBookInput1.value}`, {
         method: 'PUT', 
         mode: 'cors', 
@@ -139,22 +145,5 @@ const BooksPage = {
     updateBookBtn.addEventListener('click', myUpdateFunc);
   },
 };
-
-
-// async function getNewAccessToken() {
-//   let tokenStatus = Utils.checkTokenExpTime(localStorage.getItem('tokenExpirationTime'));
-//       if ( tokenStatus === 'expired') {
-//         console.log('have to get new acces token at route api/token');
-//         // post request to api/token for new access token
-//         const refreshToken = localStorage.getItem('refreshToken');
-//         const result = await sendRefreshToken(refreshToken);
-//         // if RT invalid, redirect to login page / return
-//         // if RT ok, store new exp time in LS and go on with the code below
-//         if ( result !== 'accessTokenChanged' ) { 
-//           console.log('new access token was not received');
-//           return };
-//       }
-// }
-
 
 export default BooksPage;
