@@ -1,4 +1,5 @@
 import { data } from '../../../state/data';
+import Utils from '../../../utils/Utils';
 import { baseURL } from '../base';
 
 export const sendRefreshToken = async (refreshToken) => {
@@ -19,6 +20,10 @@ export const sendRefreshToken = async (refreshToken) => {
 
     if ( response.status === 403 ) {
       console.log(result.message);
+      //logout logic
+      Utils.handleLogout();
+      // redirect to login page
+      Utils.changeUrl('login');
       return;
     };
 

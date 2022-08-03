@@ -1,4 +1,8 @@
 import { sendRefreshToken } from "../components/API/tokenReq/tokenReq";
+import { data } from "../state/data";
+
+
+const loginLogoutA = document.querySelector('#login-logout-a');
 
 const Utils = {
   parseRequestURL: () => {
@@ -29,6 +33,20 @@ const Utils = {
             console.log('new access token was not received');
             return };
         }
+  },
+  handleLogout: () => {
+    console.log('Logout');
+    data.setIsUserAuth = false;
+    loginLogoutA.innerHTML = 'Login';
+    loginLogoutA.removeEventListener('click', Utils.handleLogout);
+  },
+  changeUrl: (hash) => {
+    let url_ob = new URL(document.URL);
+    url_ob.hash = hash;
+    // new url
+    let new_url = url_ob.href;
+    // change the current url
+    document.location.href = new_url;
   }
 };
 

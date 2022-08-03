@@ -1,4 +1,5 @@
 import { data } from '../../state/data';
+import Utils from '../../utils/Utils';
 import './LoginPage.scss';
 
 const LoginPage = {
@@ -42,10 +43,19 @@ const LoginPage = {
       .then((response) => { 
         if (response.status === 200) {
           data.setIsUserAuth = true;
+
           loginLogoutA.innerHTML = 'Logout';
-          loginLogoutA.addEventListener('click', () => {
-            //here comes the logout logic and change innerHTML to login
-          })
+
+          // function handleLogout() {
+          //   console.log('Logout');
+
+          //   data.setIsUserAuth = false;
+          //   loginLogoutA.innerHTML = 'Login';
+          //   loginLogoutA.removeEventListener('click', handleLogout);
+
+          // }
+          loginLogoutA.addEventListener('click', Utils.handleLogout);
+
         }
         return response.json();
       })
